@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHOP BY - Цифровые товары в Telegram</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #6B46C1 0%, #4299E1 100%);
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .telegram-btn {
+            background: linear-gradient(135deg, #0088cc 0%, #34b7f1 100%);
+            transition: all 0.3s ease;
+        }
+        .telegram-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 15px -3px rgba(0, 136, 204, 0.3);
+        }
+        .game-card {
+            background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+            border-radius: 12px;
+        }
+        .animate-pulse {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .payment-badge {
+            background: linear-gradient(135deg, #f6ad55 0%, #f6871f 100%);
+        }
+        .premium-card {
+            background: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);
+        }
+        .stars-card {
+            background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-900 text-white">
+    <!-- Header -->
+    <header class="gradient-bg text-white">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="fab fa-telegram text-3xl"></i>
+                    <h1 class="text-2xl font-bold">SHOP BY</h1>
+                </div>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#products" class="hover:text-gray-200 transition">Товары</a>
+                    <a href="#advantages" class="hover:text-gray-200 transition">Преимущества</a>
+                    <a href="#reviews" class="hover:text-gray-200 transition">Отзывы</a>
+                    <a href="#faq" class="hover:text-gray-200 transition">FAQ</a>
+                </nav>
+                <button class="md:hidden text-2xl" id="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden bg-gray-800 shadow-lg rounded-b-lg">
+        <div class="container mx-auto px-4 py-3 flex flex-col space-y-3">
+            <a href="#products" class="py-2 hover:text-purple-400 transition">Товары</a>
+            <a href="#advantages" class="py-2 hover:text-purple-400 transition">Преимущества</a>
+            <a href="#reviews" class="py-2 hover:text-purple-400 transition">Отзывы</a>
+            <a href="#faq" class="py-2 hover:text-purple-400 transition">FAQ</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg text-white py-16 md:py-24">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-10 md:mb-0">
+                <div class="flex items-center mb-4">
+                    <span class="payment-badge px-4 py-1 rounded-full font-bold text-sm">Оплата только в BYN</span>
+                </div>
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">Цифровые товары для Standoff 2 и Telegram</h2>
+                <p class="text-xl mb-8 opacity-90">Звёзды, голда, аккаунты, премиум подписки и NFT подарки с быстрой доставкой!</p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="https://t.me/SHOP_BY1" target="_blank" class="telegram-btn inline-flex items-center px-8 py-4 rounded-full font-bold text-white">
+                        <i class="fab fa-telegram mr-3 text-xl"></i>
+                        Перейти в магазин
+                    </a>
+                    <a href="https://ваш-сайт.by" target="_blank" class="inline-flex items-center px-8 py-4 bg-gray-800 hover:bg-gray-700 rounded-full font-bold text-white transition">
+                        <i class="fas fa-globe mr-3 text-xl"></i>
+                        Наш сайт
+                    </a>
+                </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center">
+                <div class="relative">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" alt="Telegram" class="w-64 h-64 object-contain animate-pulse">
+                    <div class="absolute -bottom-5 -right-5 bg-yellow-400 text-gray-900 px-4 py-2 rounded-full font-bold shadow-lg">
+                        Акция: +10% к заказу
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="py-16 bg-gray-800">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">Наши товары</h2>
+            
+            <!-- Telegram Products -->
+            <div class="mb-16">
+                <h3 class="text-2xl font-bold mb-8 flex items-center">
+                    <i class="fab fa-telegram text-blue-400 mr-4 text-3xl"></i>
+                    Telegram товары
+                </h3>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Telegram Premium -->
+                    <div class="product-card premium-card p-6 rounded-xl transition duration-300">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-crown text-3xl text-white mr-4"></i>
+                            <h3 class="font-bold text-xl">Telegram Premium</h3>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center p-3 bg-blue-800 bg-opacity-50 rounded-lg">
+                                <span>3 месяца</span>
+                                <span class="font-bold text-white">от 20 BYN</span>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-blue-800 bg-opacity-50 rounded-lg">
+                                <span>6 месяцев</span>
+                                <span class="font-bold text-white">от 35 BYN</span>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-blue-800 bg-opacity-50 rounded-lg">
+                                <span>12 месяцев</span>
+                                <span class="font-bold text-white">от 60 BYN</span>
+                            </div>
+                        </div>
+                        <button class="w-full mt-6 bg-white hover:bg-gray-100 text-blue-600 py-3 rounded-lg transition">
+                            <i class="fas fa-shopping-cart mr-2"></i> Заказать
+                        </button>
+                    </div>
+                    
+                    <!-- Telegram Stars -->
+                    <div class="product-card stars-card p-6 rounded-xl transition duration-300">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-star text-3xl text-white mr-4"></i>
+                            <h3 class="font-bold text-xl">Telegram Stars</h3>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center p-3 bg-yellow-800 bg-opacity-50 rounded-lg">
+                                <span>100 Stars</span>
+                                <span class="font-bold text-white">от 10 BYN</span>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-yellow-800 bg-opacity-50 rounded-lg">
+                                <span>500 Stars</span>
+                                <span class="font-bold text-white">от 45 BYN</span>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-yellow-800 bg-opacity-50 rounded-lg">
+                                <span>1000 Stars</span>
+                                <span class="font-bold text-white">от 80 BYN</span>
+                            </div>
+                        </div>
+                        <button class="w-full mt-6 bg-white hover:bg-gray-100 text-yellow-600 py-3 rounded-lg transition">
+                            <i class="fas fa-shopping-cart mr-2"></i> Заказать
+                        </button>
+                    </div>
+                    
+                    <!-- Telegram Accounts -->
+                    <div class="product-card bg-gray-800 p-6 rounded-xl border border-purple-500 transition duration-300">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-user-shield text-3xl text-purple-400 mr-4"></i>
+                            <h3 class="font-bold text-xl">Аккаунты Telegram</h3>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center p-3 bg-gray-700 rounded-lg">
+                                <span>Обычные аккаунты</span>
+                                <span class="font-bold text-purple-400">от 15 BYN</span>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-gray-700 rounded-lg">
+                                <span>Верифицированные</span>
+                                <span class="font-bold text-purple-400">от 30 BYN</span>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-gray-700 rounded-lg">
+                                <span>Премиум аккаунты</span>
+                                <span class="font-bold text-purple-400">от 50 BYN</span>
+                            </div>
+                        </div>
+                        <button class="w-full mt-6 bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg transition">
+                            <i class="fas fa-shopping-cart mr-2"></i> Заказать
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Standoff 2 Products -->
+            <div class="mb-16">
+                <h3 class="text-2xl font-bold mb-8 flex items-center">
+                    <img src="https://play-lh.googleusercontent.com/3cDOpUu4VUMJwL3v9XnmgnqXJp9vjY9q6L3QwqVj9nH9Z5Z5Q5Q5Q5Q5Q5Q5Q5Q5Q" alt="Standoff 2" class="w-8 h-8 rounded-lg mr-4">
+                    Standoff 2 товары
+                </h3>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Standoff 2 Gold -->
+                    <div class="product-card game-card p-6 rounded-xl transition duration-300">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-coins text-3xl text-yellow-400 mr-4"></i>
+                            <h3 class="font-bold text-xl">Standoff 2 Gold</h3>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center p-3 bg-gray-700 rounded-lg">
+                                <span>100 Gold</span>
+                                <span class="font-bold text-yellow-400">от 15 BYN</span>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-gray-700 rounded-lg">
+                                <span>500 Gold</span>
+                                <span class="font-bold text-yellow-400">от 60 BYN</span>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-gray-700 rounded-lg">
+                                <span>1000 Gold</span>
+                                <span class="font-bold text-yellow-400">от 100 BYN</span>
+                            </div>
+                        </div>
+                        <button class="w-full mt-6 bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg transition">
+                            <i class="fas fa-shopping-cart mr-2"></i> Заказать
+                        </button>
+                    </div>
+                    
+                    <!-- Standoff 2 Accounts -->
+                    <div class="product-card game-card p-6 rounded-xl transition duration-300">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-user-ninja text-3xl text-green-400 mr-4"></i>
+                            <h3 class="font-bold text-xl">Аккаунты Standoff 2</h3>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center p-3 bg-gray-700 rounded-lg">
+                                <span>Обычные аккаунты</span>
+                                <span class="font-bold text-green-400">от 30 BYN</span>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-gray-700 rounded-lg">
+                                <span>Аккаунты с оружием</span>
+                                <span class="font-bold text-green-400">от 50 BYN</span>
+                            </div>
+                            <div class="flex justify-between items Center p-3 bg-gray-700 rounded-lg">
+                                <span>Премиум аккаунты</span>
+                                <span class="font-bold text-green-400">от 100 BYN</span>
+                            </div>
+                        </div>
+                        <button class="w-full mt-6 bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg transition">
+                            <i class="fas fa-shopping-cart mr-2"></i> Заказать
+                        </button>
+                    </div>
+                    
+                    <!-- NFT Gifts -->
+                    <div class="product-card bg-gray-800 p-6 rounded-xl border border-pink-500 transition duration-300">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-gift text-3xl text-pink-400 mr-4"></i>
+                            <h3 class="font-bold text-xl">NFT подарки</h3>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center p-3 bg-gray-700 rounded-lg">
+                                <span>Коллекционные NFT</span>
+                                <span class="font-bold text-pink-400">от 50 BYN</span>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-gray-700 rounded-lg">
+                                <span>Эксклюзивные подарки</span>
+                                <span class="font-bold text-pink-400">от 100 BYN</span>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-gray-700 rounded-lg">
+                                <span>Персонализированные NFT</span>
+                                <span class="font-bold text-pink-400">от 150 BYN</span>
+                            </div>
+                        </div>
+                        <button class="w-full mt-6 bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg transition">
+                            <i class="fas fa-shopping-cart mr-2"></i> Заказать
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="https://t.me/SHOP_BY1" target="_blank" class="inline-block telegram-btn px-8 py-3 rounded-full font-bold text-white">
+                    <i class="fab fa-telegram mr-2"></i> Перейти в канал
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Website Section -->
+    <section id="website" class="py-16 bg-gray-900">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-8">Наш официальный сайт</h2>
+            <div class="max-w-2xl mx-auto bg-gray-800 p-8 rounded-xl shadow-lg">
+                <i class="fas fa-globe text-5xl text-blue-400 mb-6"></i>
+                <p class="text-xl mb-6">Посетите наш официальный сайт для получения дополнительной информации о товарах и услугах.</p>
+                <a href="https://ваш-сайт.by" target="_blank" class="inline-flex items-center px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-bold text-lg transition">
+                    <i class="fas fa-external-link-alt mr-3"></i>
+                    Перейти на сайт
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Advantages Section -->
+    <section id="advantages" class="py-16 bg-gray-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">Наши преимущества</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Advantage 1 -->
+                <div class="bg-gray-800 p-6 rounded-xl shadow-sm hover:shadow-md transition">
+                    <div class="w-16 h-16 bg-purple-900 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-bolt text-purple-400 text-2xl"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-2">Мгновенная доставка</h3>
+                    <p class="text-gray-400">Получите товар сразу после оплаты, в течение 5-15 минут</p>
+                </div>
+                
+                <!-- Advantage 2 -->
+                <div class="bg-gray-800 p-6 rounded-xl shadow-sm hover:shadow-md transition">
+                    <div class="w-16 h-16 bg-blue-900 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-lock text-blue-400 text-2xl"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-2">Безопасные сделки</h3>
+                    <p class="text-gray-400">Гарантия честности и конфиденциальности всех операций</p>
+                </div>
+                
+                <!-- Advantage 3 -->
+                <div class="bg-gray-800 p-6 rounded-xl shadow-sm hover:shadow-md transition">
+                    <div class="w-16 h-16 bg-green-900 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-headset text-green-400 text-2xl"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-2">Поддержка 24/7</h3>
+                    <p class="text-gray-400">Наш менеджер ответит на все вопросы в любое время</p>
+                </div>
+                
+                <!-- Advantage 4 -->
+                <div class="bg-gray-800 p-6 rounded-xl shadow-sm hover:shadow-md transition md:col-span-3">
+                    <div class="flex flex-col md:flex-row items-center">
+                        <div class="md:w-1/3 mb-6 md:mb-0 flex justify-center">
+                            <div class="w-32 h-32 bg-yellow-900 rounded-full flex items-center justify-center">
+                                <i class="fas fa-coins text-yellow-400 text-4xl"></i>
+                            </div>
+                        </div>
+                        <div class="md:w-2/3 md:pl-8">
+                            <h3 class="font-bold text-2xl mb-4 text-center md:text-left">Оплата в BYN</h3>
+                            <p class="text-gray-400 text-center md:text-left">Мы принимаем оплату только в белорусских рублях (BYN) через удобные для вас платежные системы.</p>
+                            <div class="mt-6 flex flex-wrap justify-center md:justify-start gap-3">
+                                <span class="px-3 py-1 bg-gray-700 rounded-full text-sm">Банковские карты</span>
+                                <span class="px-3 py-1 bg-gray-700 rounded-full text-sm">ЕРИП</span>
+                                <span class="px-3 py-1 bg-gray-700 rounded-full text-sm">Криптовалюта</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="py-16 bg-gray-800">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">Отзывы клиентов</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Review 1 -->
+                <div class="bg-gray-700 p-6 rounded-xl">
+                    <div class="flex items-center mb-4">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Алексей" class="w-12 h-12 rounded-full object-cover mr-4">
+                        <div>
+                            <h4 class="font-bold">Алексей</h4>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-300">"Купил 1000 звёзд в Standoff 2, пришли через 5 минут после оплаты! Цены ниже, чем в официальном магазине. Рекомендую!"</p>
+                    <div class="mt-4 text-sm text-gray-500">
+                        <i class="far fa-clock mr-1"></i> 2 дня назад
+                    </div>
+                </div>
+                
+                <!-- Review 2 -->
+                <div class="bg-gray-700 p-6 rounded-xl">
+                    <div class="flex items-center mb-4">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Анна" class="w-12 h-12 rounded-full object-cover mr-4">
+                        <div>
+                            <h4 class="font-bold">Анна</h4>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-300">"Заказала Telegram Premium на 6 месяцев, все прошло гладко. Менеджер помог с оплатой, так как я первый раз покупала через ЕРИП."</p>
+                    <div class="mt-4 text-sm text-gray-500">
+                        <i class="far fa-clock mr-1"></i> 1 неделя назад
+                    </div>
+                </div>
+                
+                <!-- Review 3 -->
+                <div class="bg-gray-700 p-6 rounded-xl">
+                    <div class="flex items-center mb-4">
+                        <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Дмитрий" class="w-12 h-12 rounded-full object-cover mr-4">
+                        <div>
+                            <h4 class="font-bold">Дмитрий</h4>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-300">"Покупаю голду регулярно, всегда быстро и без проблем. Цены адекватные, поддержка отвечает моментально."</p>
+                    <div class="mt-4 text-sm text-gray-500">
+                        <i class="far fa-clock mr-1"></i> 3 недели назад
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="https://t.me/SHOP_BY1" target="_blank" class="inline-flex items-center px-6 py-3 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition">
+                    <i class="fab fa-telegram mr-2"></i> Читать все отзывы
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-16 bg-gray-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">Частые вопросы</h2>
+            
+            <div class="max-w-3xl mx-auto">
+                <!-- Question 1 -->
+                <div class="mb-4">
+                    <button class="faq-question w-full flex justify-between items-center p-4 bg-gray-800 rounded-lg shadow-sm hover:shadow-md transition text-left">
+                        <span class="font-medium">Как сделать заказ?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer hidden p-4 bg-gray-800 rounded-b-lg">
+                        <p class="text-gray-300">1. Перейдите в наш Telegram канал <a href="https://t.me/SHOP_BY1" class="text-blue-400 hover:underline">@SHOP_BY1</a><br>
+                        2. Выберите нужный товар из закрепленного меню<br>
+                        3. Напишите менеджеру в личные сообщения<br>
+                        4. Укажите количество и способ оплаты<br>
+                        5. Оплатите заказ в BYN<br>
+                        6. Получите товар в течение 5-15 минут</p>
+                    </div>
+                </div>
+                
+                <!-- Question 2 -->
+                <div class="mb-4">
+                    <button class="faq-question w-full flex justify-between items-center p-4 bg-gray-800 rounded-lg shadow-sm hover:shadow-md transition text-left">
+                        <span class="font-medium">Какие способы оплаты вы принимаете?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer hidden p-4 bg-gray-800 rounded-b-lg">
+                        <p class="text-gray-300">Мы принимаем оплату только в белорусских рублях (BYN):<br><br>
+                        - Банковские карты Беларуси<br>
+                        - ЕРИП (через интернет-банкинг)<br>
+                        - Криптовалюта (конвертация в BYN по курсу)<br><br>
+                        После оформления заказа менеджер вышлет вам реквизиты для оплаты.</p>
+                    </div>
+                </div>
+                
+                <!-- Question 3 -->
+                <div class="mb-4">
+                    <button class="faq-question w-full flex justify-between items-center p-4 bg-gray-800 rounded-lg shadow-sm hover:shadow-md transition text-left">
+                        <span class="font-medium">Как быстро придет товар?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer hidden p-4 bg-gray-800 rounded-b-lg">
+                        <p class="text-gray-300">Доставка всех цифровых товаров происходит мгновенно:<br><br>
+                        - Звёзды, голда, премиум подписки: 5-15 минут<br>
+                        - Аккаунты: до 30 минут<br>
+                        - NFT подарки: до 1 часа<br><br>
+                        В редких случаях при высокой загрузке доставка может занять до 24 часов.</p>
+                    </div>
+                </div>
+                
+                <!-- Question 4 -->
+                <div class="mb-4">
+                    <button class="faq-question w-full flex justify-between items-center p-4 bg-gray-800 rounded-lg shadow-sm hover:shadow-md transition text-left">
+                        <span class="font-medium">Что делать, если товар не пришел?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer hidden p-4 bg-gray-800 rounded-b-lg">
+                        <p class="text-gray-300">Если по истечении максимального срока доставка вы не получили товар:<br><br>
+                        1. Проверьте спам в Telegram<br>
+                        2. Убедитесь, что оплата прошла успешно<br>
+                        3. Напишите менеджеру с подтверждением оплаты<br><br>
+                        Мы гарантируем возврат средств или отправку товара в случае любых проблем с доставкой.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <p class="text-lg mb-6">Остались вопросы? Напишите нам прямо сейчас!</p>
+                <a href="https://t.me/SHOP_BY1" target="_blank" class="inline-flex items-center px-8 py-4 telegram-btn rounded-full font-bold text-white">
+                    <i class="fab fa-telegram mr-3 text-xl"></i> Написать в Telegram
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="gradient-bg text-white py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Присоединяйтесь к SHOP BY!</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto opacity-90">Лучшие цены на цифровые товары с мгновенной доставкой в Беларуси.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="https://t.me/SHOP_BY1" target="_blank" class="telegram-btn inline-flex items-center px-10 py-5 rounded-full font-bold text-white text-lg">
+                    <i class="fab fa-telegram mr-3 text-2xl"></i>
+                    Перейти в магазин
+                </a>
+                <a href="https://ваш-сайт.by" target="_blank" class="inline-flex items-center px-10 py-5 bg-gray-800 hover:bg-gray-900 rounded-full font-bold text-white text-lg transition">
+                    <i class="fas fa-globe mr-3 text-2xl"></i>
+                    Наш сайт
+                </a>
+            </div>
+            <div class="mt-8 text-sm">
+                <p>Оплата только в белорусских рублях (BYN)</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8 border-t border-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <div class="flex items-center space-x-2">
+                        <i class="fab fa-telegram text-2xl"></i>
+                        <span class="text-xl font-bold">SHOP BY</span>
+                    </div>
+                    <p class="text-gray-400 mt-2">Цифровые товары с доставкой</p>
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-8 text-center md:text-left">
+                    <div>
+                        <h4 class="font-bold mb-4">Магазин</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#products" class="text-gray-400 hover:text-white transition">Товары</a></li>
+                            <li><a href="#advantages" class="text-gray-400 hover:text-white transition">Преимущества</a></li>
+                            <li><a href="#reviews" class="text-gray-400 hover:text-white transition">Отзывы</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-bold mb-4">Помощь</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#faq" class="text-gray-400 hover:text-white transition">FAQ</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">Оплата</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">Доставка</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-bold mb-4">Контакты</h4>
+                        <ul class="space-y-2">
+                            <li><a href="https://t.me/SHOP_BY1" target="_blank" class="text-gray-400 hover:text-white transition">Telegram</a></li>
+                            <li><a href="https://ваш-сайт.by" target="_blank" class="text-gray-400 hover:text-white transition">Наш сайт</a></li>
+                            <li>Только BYN</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400 text-sm">
+                <p>© 2023 SHOP BY. Все права защищены.</p>
+                <div class="mt-2">
+                    <a href="#" class="hover:text-white transition">Политика конфиденциальности</a> | 
+                    <a href="#" class="hover:text-white transition">Условия использования</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Mobile menu toggle
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // FAQ accordion
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const icon = question.querySelector('i');
+                
+                // Toggle answer
+                answer.classList.toggle('hidden');
+                
+                // Rotate icon
+                icon.classList.toggle('rotate-180');
+                
+                // Close other answers
+                document.querySelectorAll('.faq-question').forEach(q => {
+                    if (q !== question) {
+                        q.nextElementSibling.classList.add('hidden');
+                        q.querySelector('i').classList.remove('rotate-180');
+                    }
+                });
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (!document.getElementById('mobile-menu').classList.contains('hidden')) {
+                        document.getElementById('mobile-menu').classList.add('hidden');
+                    }
+                }
+            });
+        });
+
+        // Add to cart buttons
+        document.querySelectorAll('button:has(.fa-shopping-cart)').forEach(button => {
+            button.addEventListener('click', function() {
+                window.open('https://t.me/SHOP_BY1', '_blank');
+            });
+        });
+    </script>
+</body>
+</html>
