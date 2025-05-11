@@ -6,6 +6,7 @@
     <title>SHOP BY - Цифровые товары в Telegram</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         .gradient-bg {
             background: linear-gradient(135deg, #6B46C1 0%, #4299E1 100%);
@@ -66,6 +67,65 @@
             overflow: hidden;
             display: none;
         }
+        /* Chat bot styles */
+        .chat-container {
+            height: 400px;
+            overflow-y: auto;
+            padding: 15px;
+            background: #e6ebee;
+            background-image: url('https://web.telegram.org/img/pattern.png');
+            background-repeat: repeat;
+        }
+        .message {
+            max-width: 80%;
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            border-radius: 7px;
+            line-height: 1.4;
+            word-wrap: break-word;
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+        .bot-message {
+            background: white;
+            align-self: flex-start;
+            margin-right: auto;
+            border-top-left-radius: 0;
+        }
+        .user-message {
+            background: #e2f7cb;
+            align-self: flex-end;
+            margin-left: auto;
+            border-top-right-radius: 0;
+        }
+        .typing-indicator {
+            display: flex;
+            padding: 10px 15px;
+            background: white;
+            border-radius: 7px;
+            width: fit-content;
+            margin-bottom: 15px;
+        }
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: #888;
+            border-radius: 50%;
+            margin: 0 2px;
+            animation: typing 1.5s infinite ease-in-out;
+        }
+        .typing-dot:nth-child(1) { animation-delay: 0s; }
+        .typing-dot:nth-child(2) { animation-delay: 0.3s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.6s; }
+        
+        @keyframes typing {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-5px); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body class="font-sans bg-gray-900 text-white">
@@ -82,6 +142,7 @@
                     <a href="#advantages" class="hover:text-gray-200 transition">Преимущества</a>
                     <a href="#reviews" class="hover:text-gray-200 transition">Отзывы</a>
                     <a href="#faq" class="hover:text-gray-200 transition">FAQ</a>
+                    <a href="#bot" class="hover:text-gray-200 transition">Наш бот</a>
                 </nav>
                 <button class="md:hidden text-2xl" id="menu-toggle">
                     <i class="fas fa-bars"></i>
@@ -97,6 +158,7 @@
             <a href="#advantages" class="py-2 hover:text-purple-400 transition">Преимущества</a>
             <a href="#reviews" class="py-2 hover:text-purple-400 transition">Отзывы</a>
             <a href="#faq" class="py-2 hover:text-purple-400 transition">FAQ</a>
+            <a href="#bot" class="py-2 hover:text-purple-400 transition">Наш бот</a>
         </div>
     </div>
 
@@ -125,6 +187,81 @@
                     <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" alt="Telegram" class="w-64 h-64 object-contain animate-pulse">
                     <div class="absolute -bottom-5 -right-5 bg-yellow-400 text-gray-900 px-4 py-2 rounded-full font-bold shadow-lg">
                         Акция: +10% к заказу
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bot Section -->
+    <section id="bot" class="py-16 bg-gray-800">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-8">Наш Telegram бот</h2>
+            <p class="text-xl text-center mb-12 max-w-2xl mx-auto">Используйте нашего бота для быстрого оформления заказов, получения уведомлений и поддержки</p>
+            
+            <div class="flex flex-col lg:flex-row gap-8 items-center">
+                <div class="lg:w-1/2">
+                    <div class="bg-gray-700 rounded-xl overflow-hidden shadow-lg">
+                        <div class="bg-blue-500 text-white p-4 flex items-center">
+                            <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center mr-3">
+                                <i class="fas fa-robot text-blue-500"></i>
+                            </div>
+                            <div>
+                                <div class="font-bold">SHOPBY Bot</div>
+                                <div class="text-xs opacity-80">online</div>
+                            </div>
+                        </div>
+                        <div class="chat-container" id="chatContainer">
+                            <div class="message bot-message">
+                                Привет! 👋 Я официальный бот магазина SHOPBY. Чем могу помочь?
+                            </div>
+                            <div class="typing-indicator" id="typingIndicator" style="display: none;">
+                                <div class="typing-dot"></div>
+                                <div class="typing-dot"></div>
+                                <div class="typing-dot"></div>
+                            </div>
+                        </div>
+                        <div class="bg-gray-100 p-4 flex gap-2">
+                            <input type="text" id="userInput" placeholder="Напишите сообщение..." class="flex-1 px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800">
+                            <button onclick="sendMessage()" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:w-1/2">
+                    <div class="bg-gray-700 p-8 rounded-xl">
+                        <h3 class="text-2xl font-bold mb-6">Возможности бота</h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-400 mt-1 mr-3"></i>
+                                <span><strong>Быстрое оформление заказов</strong> - покупайте без ожидания</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-400 mt-1 mr-3"></i>
+                                <span><strong>Уведомления о статусе</strong> - получайте информацию о заказе</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-400 mt-1 mr-3"></i>
+                                <span><strong>История покупок</strong> - все ваши заказы в одном месте</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-400 mt-1 mr-3"></i>
+                                <span><strong>Поддержка 24/7</strong> - мгновенные ответы на вопросы</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-400 mt-1 mr-3"></i>
+                                <span><strong>Эксклюзивные предложения</strong> - скидки только для пользователей бота</span>
+                            </li>
+                        </ul>
+                        
+                        <div class="mt-8">
+                            <a href="https://t.me/SHOPBY_bot" target="_blank" class="telegram-btn inline-flex items-center justify-center px-8 py-4 rounded-full font-bold text-white w-full">
+                                <i class="fab fa-telegram mr-3 text-xl"></i>
+                                Открыть бота в Telegram
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -319,7 +456,7 @@
             </div>
         </div>
     </section>
-
+    
     <!-- Website Section -->
     <section id="website" class="py-16 bg-gray-900">
         <div class="container mx-auto px-4 text-center">
@@ -335,7 +472,7 @@
             </div>
         </div>
     </section>
-
+    
     <!-- Advantages Section -->
     <section id="advantages" class="py-16 bg-gray-900">
         <div class="container mx-auto px-4">
@@ -381,7 +518,7 @@
                             <h3 class="font-bold text-2xl mb-4 text-center md:text-left">Оплата в BYN</h3>
                             <p class="text-gray-400 text-center md:text-left">Мы принимаем оплату только в белорусских рублях (BYN) через удобные для вас платежные системы.</p>
                             <div class="mt-6 flex flex-wrap justify-center md:justify-start gap-3">
-                                <span class="px-3 py-1 bg-gray-700 rounded-full text-sm">Банковские карты</span>
+                                <span class="px-3 py-1 bg-gray-700 rounded-full text-sm">Банковские карты Беларуси</span>
                                 <span class="px-3 py-1 bg-gray-700 rounded-full text-sm">ЕРИП</span>
                                 <span class="px-3 py-1 bg-gray-700 rounded-full text-sm">Криптовалюта</span>
                             </div>
@@ -391,7 +528,7 @@
             </div>
         </div>
     </section>
-
+    
     <!-- Reviews Section -->
     <section id="reviews" class="py-16 bg-gray-800">
         <div class="container mx-auto px-4">
@@ -469,7 +606,7 @@
             </div>
         </div>
     </section>
-
+    
     <!-- FAQ Section -->
     <section id="faq" class="py-16 bg-gray-900">
         <div class="container mx-auto px-4">
@@ -546,12 +683,12 @@
             </div>
         </div>
     </section>
-
+    
     <!-- CTA Section -->
     <section class="gradient-bg text-white py-16">
         <div class="container mx-auto px-4 text-center">
             <h2 class="text-3xl md:text-4xl font-bold mb-6">Присоединяйтесь к SHOP BY!</h2>
-            <p class="text-xl mb-8 max-w-2xl mx-auto opacity-90">Лучшие цены на цифровые товары с мгновенной доставкой в Беларуси.</p>
+            <p class="text-xl mb-8 max-w-2xl mx-auto opacity-90">Лучшие цены на цифровые товары с мгновенной доставка в Беларуси.</p>
             <div class="flex flex-col sm:flex-row justify-center gap-4">
                 <a href="https://t.me/SHOP_BY1" target="_blank" class="telegram-btn inline-flex items-center px-10 py-5 rounded-full font-bold text-white text-lg">
                     <i class="fab fa-telegram mr-3 text-2xl"></i>
@@ -567,7 +704,7 @@
             </div>
         </div>
     </section>
-
+    
     <!-- Footer -->
     <footer class="bg-gray-900 text-white py-8 border-t border-gray-800">
         <div class="container mx-auto px-4">
@@ -619,12 +756,12 @@
             </div>
         </div>
     </footer>
-
+    
     <!-- Telegram Assistant Bubble -->
     <div class="assistant-bubble" id="assistant-bubble">
         <img src="https://cdn-icons-png.flaticon.com/512/5968/5968804.png" alt="Telegram Assistant" class="w-16 h-16">
     </div>
-
+    
     <!-- Telegram Assistant Popup -->
     <div class="assistant-popup bg-white text-gray-800" id="assistant-popup">
         <div class="bg-blue-500 text-white p-4 flex items-center">
@@ -643,20 +780,24 @@
                 <a href="#faq" class="block bg-gray-100 hover:bg-gray-200 p-3 rounded-lg transition">
                     <i class="fas fa-question-circle text-blue-500 mr-2"></i> Частые вопросы
                 </a>
-                <a href="https://t.me/SHOP_BY1_bot" target="_blank" class="block bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-lg transition text-center">
+                <a href="https://t.me/SHOPBY_bot" target="_blank" class="block bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-lg transition text-center">
                     <i class="fas fa-robot mr-2"></i> Написать боту
                 </a>
             </div>
         </div>
     </div>
-
+    
     <!-- Scripts -->
     <script>
+        // Конфигурация Telegram бота
+        const BOT_TOKEN = '7417642074:AAG3rW87aXCyzPrtbfqmhc8H1ZsVm2X025Q';
+        const BOT_USERNAME = 'SHOPBY_bot';
+        
         // Mobile menu toggle
         document.getElementById('menu-toggle').addEventListener('click', function() {
             document.getElementById('mobile-menu').classList.toggle('hidden');
         });
-
+        
         // FAQ accordion
         document.querySelectorAll('.faq-question').forEach(question => {
             question.addEventListener('click', () => {
@@ -678,7 +819,7 @@
                 });
             });
         });
-
+        
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
@@ -700,32 +841,241 @@
                 }
             });
         });
-
+        
         // Add to cart buttons
         document.querySelectorAll('button:has(.fa-shopping-cart)').forEach(button => {
             button.addEventListener('click', function() {
                 window.open('https://t.me/SHOP_BY1', '_blank');
             });
         });
-
+        
         // Telegram Assistant
         const assistantBubble = document.getElementById('assistant-bubble');
         const assistantPopup = document.getElementById('assistant-popup');
         const closePopup = document.getElementById('close-popup');
-
+        
         assistantBubble.addEventListener('click', function() {
             assistantPopup.style.display = assistantPopup.style.display === 'block' ? 'none' : 'block';
         });
-
+        
         closePopup.addEventListener('click', function() {
             assistantPopup.style.display = 'none';
         });
-
+        
         // Close popup when clicking outside
         document.addEventListener('click', function(event) {
             if (!assistantPopup.contains(event.target) && event.target !== assistantBubble) {
                 assistantPopup.style.display = 'none';
             }
+        });
+        
+        // Chat bot functionality
+        const chatContainer = document.getElementById('chatContainer');
+        const typingIndicator = document.getElementById('typingIndicator');
+        const userInput = document.getElementById('userInput');
+        
+        function sendMessage() {
+            const text = userInput.value.trim();
+            if (!text) return;
+            
+            // Show user message
+            const userMessage = document.createElement('div');
+            userMessage.className = 'message user-message';
+            userMessage.textContent = text;
+            chatContainer.appendChild(userMessage);
+            
+            // Clear input
+            userInput.value = '';
+            
+            // Show typing indicator
+            typingIndicator.style.display = 'flex';
+            
+            // Scroll to bottom
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+            
+            // Hide typing indicator and show bot response after delay
+            setTimeout(() => {
+                typingIndicator.style.display = 'none';
+                
+                // Generate bot response
+                let botResponse;
+                
+                if (text.toLowerCase().includes('каталог') || text.toLowerCase().includes('товары')) {
+                    botResponse = `
+                        <div class="message bot-message">
+                            <b>Наши категории товаров:</b>
+                            <div class="mt-3 space-y-2">
+                                <div class="flex items-center">
+                                    <i class="fas fa-crown mr-2 text-blue-500"></i>
+                                    <span>Telegram Premium</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-star mr-2 text-yellow-500"></i>
+                                    <span>Telegram Stars</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-user mr-2 text-purple-500"></i>
+                                    <span>Аккаунты Telegram</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-coins mr-2 text-yellow-400"></i>
+                                    <span>Standoff 2 Gold</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-gamepad mr-2 text-green-500"></i>
+                                    <span>Аккаунты Standoff 2</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-gift mr-2 text-pink-500"></i>
+                                    <span>NFT подарки</span>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <a href="https://t.me/SHOP_BY1" target="_blank" class="inline-block bg-blue-500 hover:bg-blue-600 text-white text-sm py-1 px-3 rounded-full transition">
+                                    <i class="fas fa-shopping-cart mr-1"></i> Перейти в магазин
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                } 
+                else if (text.toLowerCase().includes('акции') || text.toLowerCase().includes('скидки')) {
+                    botResponse = `
+                        <div class="message bot-message">
+                            <b>🔥 Текущие акции:</b>
+                            <div class="mt-3 space-y-3">
+                                <div class="bg-yellow-100 text-yellow-800 p-3 rounded-lg">
+                                    <div class="font-bold">+10% к любому заказу</div>
+                                    <div class="text-sm">Действует до конца месяца</div>
+                                </div>
+                                <div class="bg-blue-100 text-blue-800 p-3 rounded-lg">
+                                    <div class="font-bold">Бесплатная доставка</div>
+                                    <div class="text-sm">При заказе от 50 BYN</div>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <a href="https://t.me/SHOP_BY1" target="_blank" class="inline-block bg-blue-500 hover:bg-blue-600 text-white text-sm py-1 px-3 rounded-full transition">
+                                    <i class="fas fa-gift mr-1"></i> Воспользоваться акцией
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                }
+                else if (text.toLowerCase().includes('оплат') || text.toLowerCase().includes('купить') || text.toLowerCase().includes('заказ')) {
+                    botResponse = `
+                        <div class="message bot-message">
+                            <b>Как сделать заказ:</b>
+                            <div class="mt-3 space-y-2 text-sm">
+                                <div class="flex items-start">
+                                    <span class="bg-blue-500 text-white rounded-full w-5 h-5 flex items-center justify-center mr-2 flex-shrink-0">1</span>
+                                    <span>Напишите в наш магазин <a href="https://t.me/SHOP_BY1" class="text-blue-400 hover:underline">@SHOP_BY1</a></span>
+                                </div>
+                                <div class="flex items-start">
+                                    <span class="bg-blue-500 text-white rounded-full w-5 h-5 flex items-center justify-center mr-2 flex-shrink-0">2</span>
+                                    <span>Выберите товар и количество</span>
+                                </div>
+                                <div class="flex items-start">
+                                    <span class="bg-blue-500 text-white rounded-full w-5 h-5 flex items-center justify-center mr-2 flex-shrink-0">3</span>
+                                    <span>Оплатите заказ в BYN удобным способом</span>
+                                </div>
+                                <div class="flex items-start">
+                                    <span class="bg-blue-500 text-white rounded-full w-5 h-5 flex items-center justify-center mr-2 flex-shrink-0">4</span>
+                                    <span>Получите товар в течение 5-15 минут</span>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <a href="https://t.me/SHOP_BY1" target="_blank" class="inline-block bg-blue-500 hover:bg-blue-600 text-white text-sm py-1 px-3 rounded-full transition">
+                                    <i class="fas fa-paper-plane mr-1"></i> Написать в магазин
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                }
+                else if (text.toLowerCase().includes('поддерж') || text.toLowerCase().includes('помощ') || text.toLowerCase().includes('вопрос')) {
+                    botResponse = `
+                        <div class="message bot-message">
+                            <b>Наша поддержка:</b>
+                            <div class="mt-3 space-y-2">
+                                <div class="flex items-center">
+                                    <i class="fas fa-clock mr-2 text-blue-500"></i>
+                                    <span>Работаем 24/7</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-bolt mr-2 text-blue-500"></i>
+                                    <span>Среднее время ответа: 5 минут</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-headset mr-2 text-blue-500"></i>
+                                    <span>Поможем с любыми вопросами</span>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <a href="https://t.me/SHOP_BY1" target="_blank" class="inline-block bg-blue-500 hover:bg-blue-600 text-white text-sm py-1 px-3 rounded-full transition">
+                                    <i class="fas fa-comment mr-1"></i> Написать в поддержку
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                }
+                else {
+                    botResponse = `
+                        <div class="message bot-message">
+                            Извините, я не совсем понял ваш вопрос. Вы можете спросить о:
+                            <div class="mt-2 space-y-1">
+                                <div class="flex items-center">
+                                    <i class="fas fa-circle text-blue-500 text-xs mr-2"></i>
+                                    <span>Каталоге товаров</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-circle text-blue-500 text-xs mr-2"></i>
+                                    <span>Акциях и скидках</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-circle text-blue-500 text-xs mr-2"></i>
+                                    <span>Способах оплаты</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-circle text-blue-500 text-xs mr-2"></i>
+                                    <span>Поддержке</span>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <a href="https://t.me/SHOP_BY1" target="_blank" class="inline-block bg-blue-500 hover:bg-blue-600 text-white text-sm py-1 px-3 rounded-full transition">
+                                    <i class="fas fa-question-circle mr-1"></i> Задать вопрос менеджеру
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                // Add bot response to chat
+                chatContainer.insertAdjacentHTML('beforeend', botResponse);
+                
+                // Scroll to bottom
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            }, 1000 + Math.random() * 1000);
+        }
+        
+        // Allow sending message with Enter key
+        userInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+        
+        // Initialize Telegram WebApp
+        function initTelegramWebApp() {
+            if (window.Telegram && window.Telegram.WebApp) {
+                const tg = window.Telegram.WebApp;
+                tg.expand();
+                tg.enableClosingConfirmation();
+                
+                // You can add more Telegram WebApp functionality here
+            }
+        }
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            initTelegramWebApp();
         });
     </script>
 </body>
