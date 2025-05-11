@@ -43,6 +43,29 @@
         .stars-card {
             background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
         }
+        .assistant-bubble {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .assistant-bubble:hover {
+            transform: scale(1.1);
+        }
+        .assistant-popup {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 300px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            overflow: hidden;
+            display: none;
+        }
     </style>
 </head>
 <body class="font-sans bg-gray-900 text-white">
@@ -51,7 +74,7 @@
         <div class="container mx-auto px-4 py-6">
             <div class="flex justify-between items-center">
                 <div class="flex items-center space-x-2">
-                    <i class="fab fa-telegram text-3xl"></i>
+                    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" alt="Telegram" class="w-10 h-10">
                     <h1 class="text-2xl font-bold">SHOP BY</h1>
                 </div>
                 <nav class="hidden md:flex space-x-8">
@@ -91,7 +114,7 @@
                         <i class="fab fa-telegram mr-3 text-xl"></i>
                         Перейти в магазин
                     </a>
-                    <a href="https://ваш-сайт.by" target="_blank" class="inline-flex items-center px-8 py-4 bg-gray-800 hover:bg-gray-700 rounded-full font-bold text-white transition">
+                    <a href="#website" class="inline-flex items-center px-8 py-4 bg-gray-800 hover:bg-gray-700 rounded-full font-bold text-white transition">
                         <i class="fas fa-globe mr-3 text-xl"></i>
                         Наш сайт
                     </a>
@@ -116,7 +139,7 @@
             <!-- Telegram Products -->
             <div class="mb-16">
                 <h3 class="text-2xl font-bold mb-8 flex items-center">
-                    <i class="fab fa-telegram text-blue-400 mr-4 text-3xl"></i>
+                    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" alt="Telegram" class="w-8 h-8 mr-4">
                     Telegram товары
                 </h3>
                 
@@ -124,9 +147,10 @@
                     <!-- Telegram Premium -->
                     <div class="product-card premium-card p-6 rounded-xl transition duration-300">
                         <div class="flex items-center mb-4">
-                            <i class="fas fa-crown text-3xl text-white mr-4"></i>
+                            <img src="https://cdn-icons-png.flaticon.com/512/4109/4109592.png" alt="Premium" class="w-12 h-12 mr-4">
                             <h3 class="font-bold text-xl">Telegram Premium</h3>
                         </div>
+                        <img src="https://cdn-icons-png.flaticon.com/512/4109/4109592.png" alt="Premium" class="w-full h-32 object-contain mb-4">
                         <div class="space-y-4">
                             <div class="flex justify-between items-center p-3 bg-blue-800 bg-opacity-50 rounded-lg">
                                 <span>3 месяца</span>
@@ -149,9 +173,10 @@
                     <!-- Telegram Stars -->
                     <div class="product-card stars-card p-6 rounded-xl transition duration-300">
                         <div class="flex items-center mb-4">
-                            <i class="fas fa-star text-3xl text-white mr-4"></i>
+                            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828884.png" alt="Stars" class="w-12 h-12 mr-4">
                             <h3 class="font-bold text-xl">Telegram Stars</h3>
                         </div>
+                        <img src="https://cdn-icons-png.flaticon.com/512/1828/1828884.png" alt="Stars" class="w-full h-32 object-contain mb-4">
                         <div class="space-y-4">
                             <div class="flex justify-between items-center p-3 bg-yellow-800 bg-opacity-50 rounded-lg">
                                 <span>100 Stars</span>
@@ -174,9 +199,10 @@
                     <!-- Telegram Accounts -->
                     <div class="product-card bg-gray-800 p-6 rounded-xl border border-purple-500 transition duration-300">
                         <div class="flex items-center mb-4">
-                            <i class="fas fa-user-shield text-3xl text-purple-400 mr-4"></i>
+                            <img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png" alt="Accounts" class="w-12 h-12 mr-4">
                             <h3 class="font-bold text-xl">Аккаунты Telegram</h3>
                         </div>
+                        <img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png" alt="Accounts" class="w-full h-32 object-contain mb-4">
                         <div class="space-y-4">
                             <div class="flex justify-between items-center p-3 bg-gray-700 rounded-lg">
                                 <span>Обычные аккаунты</span>
@@ -209,9 +235,10 @@
                     <!-- Standoff 2 Gold -->
                     <div class="product-card game-card p-6 rounded-xl transition duration-300">
                         <div class="flex items-center mb-4">
-                            <i class="fas fa-coins text-3xl text-yellow-400 mr-4"></i>
+                            <img src="https://cdn-icons-png.flaticon.com/512/2698/2698231.png" alt="Gold" class="w-12 h-12 mr-4">
                             <h3 class="font-bold text-xl">Standoff 2 Gold</h3>
                         </div>
+                        <img src="https://cdn-icons-png.flaticon.com/512/2698/2698231.png" alt="Gold" class="w-full h-32 object-contain mb-4">
                         <div class="space-y-4">
                             <div class="flex justify-between items-center p-3 bg-gray-700 rounded-lg">
                                 <span>100 Gold</span>
@@ -234,9 +261,10 @@
                     <!-- Standoff 2 Accounts -->
                     <div class="product-card game-card p-6 rounded-xl transition duration-300">
                         <div class="flex items-center mb-4">
-                            <i class="fas fa-user-ninja text-3xl text-green-400 mr-4"></i>
+                            <img src="https://cdn-icons-png.flaticon.com/512/3132/3132693.png" alt="Accounts" class="w-12 h-12 mr-4">
                             <h3 class="font-bold text-xl">Аккаунты Standoff 2</h3>
                         </div>
+                        <img src="https://cdn-icons-png.flaticon.com/512/3132/3132693.png" alt="Accounts" class="w-full h-32 object-contain mb-4">
                         <div class="space-y-4">
                             <div class="flex justify-between items-center p-3 bg-gray-700 rounded-lg">
                                 <span>Обычные аккаунты</span>
@@ -246,7 +274,7 @@
                                 <span>Аккаунты с оружием</span>
                                 <span class="font-bold text-green-400">от 50 BYN</span>
                             </div>
-                            <div class="flex justify-between items Center p-3 bg-gray-700 rounded-lg">
+                            <div class="flex justify-between items-center p-3 bg-gray-700 rounded-lg">
                                 <span>Премиум аккаунты</span>
                                 <span class="font-bold text-green-400">от 100 BYN</span>
                             </div>
@@ -259,9 +287,10 @@
                     <!-- NFT Gifts -->
                     <div class="product-card bg-gray-800 p-6 rounded-xl border border-pink-500 transition duration-300">
                         <div class="flex items-center mb-4">
-                            <i class="fas fa-gift text-3xl text-pink-400 mr-4"></i>
+                            <img src="https://cdn-icons-png.flaticon.com/512/3652/3652191.png" alt="NFT" class="w-12 h-12 mr-4">
                             <h3 class="font-bold text-xl">NFT подарки</h3>
                         </div>
+                        <img src="https://cdn-icons-png.flaticon.com/512/3652/3652191.png" alt="NFT" class="w-full h-32 object-contain mb-4">
                         <div class="space-y-4">
                             <div class="flex justify-between items-center p-3 bg-gray-700 rounded-lg">
                                 <span>Коллекционные NFT</span>
@@ -296,12 +325,13 @@
         <div class="container mx-auto px-4 text-center">
             <h2 class="text-3xl font-bold mb-8">Наш официальный сайт</h2>
             <div class="max-w-2xl mx-auto bg-gray-800 p-8 rounded-xl shadow-lg">
-                <i class="fas fa-globe text-5xl text-blue-400 mb-6"></i>
+                <img src="https://cdn-icons-png.flaticon.com/512/2956/2956788.png" alt="Website" class="w-32 h-32 mx-auto mb-6">
                 <p class="text-xl mb-6">Посетите наш официальный сайт для получения дополнительной информации о товарах и услугах.</p>
-                <a href="https://ваш-сайт.by" target="_blank" class="inline-flex items-center px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-bold text-lg transition">
+                <a href="#" class="inline-flex items-center px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-bold text-lg transition">
                     <i class="fas fa-external-link-alt mr-3"></i>
                     Перейти на сайт
                 </a>
+                <p class="mt-6 text-gray-400">Сайт находится в разработке, скоро будет доступен</p>
             </div>
         </div>
     </section>
@@ -315,16 +345,16 @@
                 <!-- Advantage 1 -->
                 <div class="bg-gray-800 p-6 rounded-xl shadow-sm hover:shadow-md transition">
                     <div class="w-16 h-16 bg-purple-900 rounded-full flex items-center justify-center mb-4">
-                        <i class="fas fa-bolt text-purple-400 text-2xl"></i>
+                        <img src="https://cdn-icons-png.flaticon.com/512/3659/3659899.png" alt="Fast" class="w-8 h-8">
                     </div>
                     <h3 class="font-bold text-xl mb-2">Мгновенная доставка</h3>
-                    <p class="text-gray-400">Получите товар сразу после оплаты, в течение 5-15 минут</p>
+                    <p class="text-gray-400">Получите товар сразу после оплата, в течение 5-15 минут</p>
                 </div>
                 
                 <!-- Advantage 2 -->
                 <div class="bg-gray-800 p-6 rounded-xl shadow-sm hover:shadow-md transition">
                     <div class="w-16 h-16 bg-blue-900 rounded-full flex items-center justify-center mb-4">
-                        <i class="fas fa-lock text-blue-400 text-2xl"></i>
+                        <img src="https://cdn-icons-png.flaticon.com/512/2957/2957152.png" alt="Secure" class="w-8 h-8">
                     </div>
                     <h3 class="font-bold text-xl mb-2">Безопасные сделки</h3>
                     <p class="text-gray-400">Гарантия честности и конфиденциальности всех операций</p>
@@ -333,7 +363,7 @@
                 <!-- Advantage 3 -->
                 <div class="bg-gray-800 p-6 rounded-xl shadow-sm hover:shadow-md transition">
                     <div class="w-16 h-16 bg-green-900 rounded-full flex items-center justify-center mb-4">
-                        <i class="fas fa-headset text-green-400 text-2xl"></i>
+                        <img src="https://cdn-icons-png.flaticon.com/512/3059/3059518.png" alt="Support" class="w-8 h-8">
                     </div>
                     <h3 class="font-bold text-xl mb-2">Поддержка 24/7</h3>
                     <p class="text-gray-400">Наш менеджер ответит на все вопросы в любое время</p>
@@ -344,7 +374,7 @@
                     <div class="flex flex-col md:flex-row items-center">
                         <div class="md:w-1/3 mb-6 md:mb-0 flex justify-center">
                             <div class="w-32 h-32 bg-yellow-900 rounded-full flex items-center justify-center">
-                                <i class="fas fa-coins text-yellow-400 text-4xl"></i>
+                                <img src="https://cdn-icons-png.flaticon.com/512/2883/2883773.png" alt="Payment" class="w-16 h-16">
                             </div>
                         </div>
                         <div class="md:w-2/3 md:pl-8">
@@ -499,10 +529,10 @@
                         <i class="fas fa-chevron-down transition-transform duration-300"></i>
                     </button>
                     <div class="faq-answer hidden p-4 bg-gray-800 rounded-b-lg">
-                        <p class="text-gray-300">Если по истечении максимального срока доставка вы не получили товар:<br><br>
+                        <p class="text-gray-300">Если по истечении максимального срока доставки вы не получили товар:<br><br>
                         1. Проверьте спам в Telegram<br>
                         2. Убедитесь, что оплата прошла успешно<br>
-                        3. Напишите менеджеру с подтверждением оплаты<br><br>
+                        3. Напишите менеджеру с подтверждением оплата<br><br>
                         Мы гарантируем возврат средств или отправку товара в случае любых проблем с доставкой.</p>
                     </div>
                 </div>
@@ -527,7 +557,7 @@
                     <i class="fab fa-telegram mr-3 text-2xl"></i>
                     Перейти в магазин
                 </a>
-                <a href="https://ваш-сайт.by" target="_blank" class="inline-flex items-center px-10 py-5 bg-gray-800 hover:bg-gray-900 rounded-full font-bold text-white text-lg transition">
+                <a href="#website" class="inline-flex items-center px-10 py-5 bg-gray-800 hover:bg-gray-900 rounded-full font-bold text-white text-lg transition">
                     <i class="fas fa-globe mr-3 text-2xl"></i>
                     Наш сайт
                 </a>
@@ -544,7 +574,7 @@
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <div class="mb-6 md:mb-0">
                     <div class="flex items-center space-x-2">
-                        <i class="fab fa-telegram text-2xl"></i>
+                        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" alt="Telegram" class="w-8 h-8">
                         <span class="text-xl font-bold">SHOP BY</span>
                     </div>
                     <p class="text-gray-400 mt-2">Цифровые товары с доставкой</p>
@@ -573,7 +603,7 @@
                         <h4 class="font-bold mb-4">Контакты</h4>
                         <ul class="space-y-2">
                             <li><a href="https://t.me/SHOP_BY1" target="_blank" class="text-gray-400 hover:text-white transition">Telegram</a></li>
-                            <li><a href="https://ваш-сайт.by" target="_blank" class="text-gray-400 hover:text-white transition">Наш сайт</a></li>
+                            <li><a href="#website" class="text-gray-400 hover:text-white transition">Наш сайт</a></li>
                             <li>Только BYN</li>
                         </ul>
                     </div>
@@ -589,6 +619,36 @@
             </div>
         </div>
     </footer>
+
+    <!-- Telegram Assistant Bubble -->
+    <div class="assistant-bubble" id="assistant-bubble">
+        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968804.png" alt="Telegram Assistant" class="w-16 h-16">
+    </div>
+
+    <!-- Telegram Assistant Popup -->
+    <div class="assistant-popup bg-white text-gray-800" id="assistant-popup">
+        <div class="bg-blue-500 text-white p-4 flex items-center">
+            <img src="https://cdn-icons-png.flaticon.com/512/5968/5968804.png" alt="Telegram" class="w-8 h-8 mr-2">
+            <h3 class="font-bold">Telegram Assistant</h3>
+            <button class="ml-auto text-white" id="close-popup">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="p-4">
+            <p class="mb-4">Привет! Я ваш помощник. Как я могу вам помочь?</p>
+            <div class="space-y-2">
+                <a href="https://t.me/SHOP_BY1" target="_blank" class="block bg-gray-100 hover:bg-gray-200 p-3 rounded-lg transition">
+                    <i class="fab fa-telegram text-blue-500 mr-2"></i> Перейти в магазин
+                </a>
+                <a href="#faq" class="block bg-gray-100 hover:bg-gray-200 p-3 rounded-lg transition">
+                    <i class="fas fa-question-circle text-blue-500 mr-2"></i> Частые вопросы
+                </a>
+                <a href="https://t.me/SHOP_BY1_bot" target="_blank" class="block bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-lg transition text-center">
+                    <i class="fas fa-robot mr-2"></i> Написать боту
+                </a>
+            </div>
+        </div>
+    </div>
 
     <!-- Scripts -->
     <script>
@@ -646,6 +706,26 @@
             button.addEventListener('click', function() {
                 window.open('https://t.me/SHOP_BY1', '_blank');
             });
+        });
+
+        // Telegram Assistant
+        const assistantBubble = document.getElementById('assistant-bubble');
+        const assistantPopup = document.getElementById('assistant-popup');
+        const closePopup = document.getElementById('close-popup');
+
+        assistantBubble.addEventListener('click', function() {
+            assistantPopup.style.display = assistantPopup.style.display === 'block' ? 'none' : 'block';
+        });
+
+        closePopup.addEventListener('click', function() {
+            assistantPopup.style.display = 'none';
+        });
+
+        // Close popup when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!assistantPopup.contains(event.target) && event.target !== assistantBubble) {
+                assistantPopup.style.display = 'none';
+            }
         });
     </script>
 </body>
